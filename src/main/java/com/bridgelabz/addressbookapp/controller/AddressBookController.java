@@ -39,6 +39,30 @@ public class AddressBookController {
         ResponseDTO responseDTO = new ResponseDTO("Get call for id successful", addressBook);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
+    @GetMapping("/getAddressBookByCity/{city}")
+    public ResponseEntity<ResponseDTO> getAddressBookByCity(@PathVariable String city){
+        List<AddressBook> addressBook = addressBookService.getAddressBookByCity(city);
+        ResponseDTO responseDTO = new ResponseDTO("Get call for city successful", addressBook);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+    }
+    @GetMapping("/getAddressBookByState/{state}")
+    public ResponseEntity<ResponseDTO> getAddressBookByState(@PathVariable String state){
+        List<AddressBook> addressBook = addressBookService.getAddressBookByState(state);
+        ResponseDTO responseDTO = new ResponseDTO("Get call for state successful", addressBook);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+    }
+    @GetMapping("/sortAddressBookByCity")
+    public ResponseEntity<ResponseDTO> sortAddressBookByCity(){
+        List<AddressBook> addressBook = addressBookService.sortAddressBookByCity();
+        ResponseDTO responseDTO = new ResponseDTO("Get call for sorted data by city successful", addressBook);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+    }
+    @GetMapping("/sortAddressBookByState")
+    public ResponseEntity<ResponseDTO> sortAddressBookByState(){
+        List<AddressBook> addressBook = addressBookService.sortAddressBookByState();
+        ResponseDTO responseDTO = new ResponseDTO("Get call for sorted data by state successful", addressBook);
+        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+    }
     @PutMapping("/editAddressBook/{id}")
     public ResponseEntity<ResponseDTO> editAddressBook(@PathVariable int id, @Valid @RequestBody AddressBookDTO addressBookDTO){
         AddressBook addressBook = addressBookService.editAddressBook(id, addressBookDTO);

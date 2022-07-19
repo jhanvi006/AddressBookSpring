@@ -42,4 +42,22 @@ public class AddressBookService implements IAddressBookService {
         AddressBook addressBook = this.getAddressBookById(id);
         repository.delete(addressBook);
     }
+    @Override
+    public List<AddressBook> getAddressBookByCity(String city) {
+        return repository.findByCity(city);
+    }
+
+    @Override
+    public List<AddressBook> getAddressBookByState(String state) {
+        return repository.findByState(state);
+    }
+    @Override
+    public List<AddressBook> sortAddressBookByCity() {
+        return repository.findAllByOrderByCity();
+    }
+
+    @Override
+    public List<AddressBook> sortAddressBookByState() {
+        return repository.findAllByOrderByState();
+    }
 }

@@ -3,6 +3,8 @@ package com.bridgelabz.addressbookapp.model;
 import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,8 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @Entity
+@DynamicInsert
+@DynamicUpdate
 public class AddressBook {
     @Id
     @GeneratedValue
