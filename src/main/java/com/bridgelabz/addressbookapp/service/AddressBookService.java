@@ -15,9 +15,16 @@ import java.util.List;
 public class AddressBookService implements IAddressBookService {
     @Autowired
     private AddressBookRepository repository;
+
+    public void isEmpty(List<AddressBook> addressBookList){
+        if(addressBookList.isEmpty())
+            throw new AddressBookException("Address Book is empty!");
+    }
     @Override
     public List<AddressBook> getAddressBook() {
-        return repository.findAll();
+        List<AddressBook> addressBookList = repository.findAll();
+        isEmpty(addressBookList);
+        return addressBookList;
     }
     @Override
     public AddressBook addAddressBook(AddressBookDTO addressBookDTO) {
@@ -44,20 +51,32 @@ public class AddressBookService implements IAddressBookService {
     }
     @Override
     public List<AddressBook> getAddressBookByCity(String city) {
-        return repository.findByCity(city);
+        List<AddressBook> addressBookList = repository.findByCity(city);
+        if(addressBookList.isEmpty()) {
+            throw new AddressBookException("Address Book with city "+city+" not found!");
+        }
+        return addressBookList;
     }
 
     @Override
     public List<AddressBook> getAddressBookByState(String state) {
-        return repository.findByState(state);
+        List<AddressBook> addressBookList = repository.findByState(state);
+        if(addressBookList.isEmpty()) {
+            throw new AddressBookException("Address Book with state "+state+" not found!");
+        }
+        return addressBookList;
     }
     @Override
     public List<AddressBook> sortAddressBookByCity() {
-        return repository.findAllByOrderByCity();
+        List<AddressBook> addressBookList = repository.findAllByOrderByCity();
+        isEmpty(addressBookList);
+        return addressBookList;
     }
 
     @Override
     public List<AddressBook> sortAddressBookByState() {
-        return repository.findAllByOrderByState();
+        List<AddressBook> addressBookList = repository.findAllByOrderByState();
+        isEmpty(addressBookList);
+        return addressBookList;
     }
 }
